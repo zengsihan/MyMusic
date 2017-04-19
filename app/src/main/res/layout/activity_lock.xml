@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="#70000000"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/lock_time"
+            android:textColor="@color/snow"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="40dp"
+            android:text="12:22"
+            android:textSize="37sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/lock_date"
+            android:textColor="@color/snow"
+            android:layout_alignLeft="@id/lock_time"
+            android:layout_below="@id/lock_time"
+            android:layout_marginTop="5dp"
+            android:text="12月12日 星期一"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/lock_music_name"
+            android:text="音乐名"
+            android:layout_alignLeft="@id/lock_time"
+            android:layout_below="@id/lock_date"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/snow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/lock_author"
+            android:text="作者"
+            android:textColor="@color/snow"
+            android:layout_alignLeft="@id/lock_time"
+            android:layout_below="@id/lock_music_name"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/lock_lrc"
+            android:textColor="@color/snow"
+            android:text="歌词"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/lock_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/lock_control"
+            android:layout_marginBottom="30dp"
+            android:layout_above="@+id/lock_tip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/lock_music_fav"
+                android:src="@drawable/lock_btn_love"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/lock_music_pre"
+                android:src="@drawable/lock_btn_prev"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/lock_music_play"
+                android:src="@drawable/lock_btn_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/lock_music_next"
+                android:src="@drawable/lock_btn_next"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/lock_music_abandon"
+                android:src="@drawable/lock_btn_discard"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lock_tip"
+            android:text=">>> 滑动解锁"
+            android:textColor="@color/snow"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+</RelativeLayout>

@@ -1,8 +1,13 @@
-package com.zsh.learn.mymusic;
+package com.zsh.learn.mymusic.home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.zsh.learn.mymusic.R;
+
+/**
+ * 主页面
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
