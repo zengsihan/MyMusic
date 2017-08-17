@@ -17,4 +17,7 @@ public class Tools {
     public static void fullScreen(Activity activity){
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+    // 用于记录复制到了Excel里的第几行数据。
+    public static int count=0;
 }
