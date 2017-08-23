@@ -69,7 +69,6 @@
 			android:layout_height="match_parent">
 			<TextView
 				android:id="@+id/play_currentPosition"
-				android:text="01:33"
 				android:layout_centerInParent="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"/>
@@ -94,7 +93,6 @@
 			android:layout_height="match_parent">
 			<TextView
 				android:id="@+id/play_duration"
-				android:text="03:41"
 				android:layout_centerInParent="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"/>
@@ -124,7 +122,7 @@
 			android:layout_height="wrap_content"/>
 		<ImageView
 			android:id="@+id/play_music_play"
-			android:src="@drawable/play_btn_pause"
+			android:src="@drawable/play_btn_play"
 			android:layout_weight="1"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"/>
@@ -136,7 +134,7 @@
 			android:layout_height="wrap_content"/>
 		<ImageView
 			android:id="@+id/play_music_abandon"
-			android:src="@drawable/lock_btn_discard"
+			android:src="@drawable/play_btn_discard"
 			android:layout_weight="1"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"/>

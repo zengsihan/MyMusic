@@ -31,4 +31,38 @@ public class SaveMsg {
         SharedPreferences spf=context.getSharedPreferences("isFirstInApp",Context.MODE_PRIVATE);//这个要和set方法对应，name要一样
         return spf.getBoolean("first",true);//取出共享参数的数据。
     }
+
+    /**
+     * 在退出时，保存播放歌曲的信息
+     * @param context
+     * @param name 歌曲的name
+     * @param position 歌曲的播放进度
+     */
+    public static void setMusicPlayInfo(Context context,String name,int position){
+        SharedPreferences spf = context.getSharedPreferences("musicInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = spf.edit();
+        editor.putString("name",name);
+        editor.putInt("position",position);
+        editor.commit();
+    }
+
+    /**
+     * 获取在退出时保存的歌曲name
+     * @param context
+     * @return name
+     */
+    public static String getMusicPlayInfoName(Context context){
+        SharedPreferences spf = context.getSharedPreferences("musicInfo",Context.MODE_PRIVATE);
+        return spf.getString("name","nothing");
+    }
+
+    /**
+     * 获取在退出时保存的歌曲播放进度
+     * @param context
+     * @return
+     */
+    public static int getMusicPlayInfoPosition(Context context){
+        SharedPreferences spf = context.getSharedPreferences("musicInfo",Context.MODE_PRIVATE);
+        return spf.getInt("position",-1);
+    }
 }

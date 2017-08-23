@@ -76,7 +76,7 @@ public class LeadActivity extends AppCompatActivity{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveMsg.setIsFirstInApp(LeadActivity.this,true);//保存共享参数信息，下次进入不走引导页面。
+                SaveMsg.setIsFirstInApp(LeadActivity.this,false);//保存共享参数信息，下次进入不走引导页面。
                 Intent i=new Intent(LeadActivity.this,LoadingActivity.class);//跳转到loading页面
                 startActivity(i);
                 finish();

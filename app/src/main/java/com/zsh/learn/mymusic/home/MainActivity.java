@@ -69,7 +69,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void getView() {
-        musicDB = new MusicDB(this);
         tv_show= (TextView) findViewById(R.id.main_tv_showinfo);
         tv_show2= (TextView) findViewById(R.id.main_tv_showinfo2);
         tv_show3= (TextView) findViewById(R.id.main_tv_showinfo3);
@@ -81,15 +80,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         btn_delete= (Button) findViewById(R.id.main_btn_delete);
         btn_paly= (Button) findViewById(R.id.main_btn_play);
         btn_otherPlay= (Button) findViewById(R.id.main_btn_otherplay);
-        btn_download.setOnClickListener(this);
-        btn_delete.setOnClickListener(this);
-        btn_paly.setOnClickListener(this);
-        btn_otherPlay.setOnClickListener(this);
     }
 
     @Override
     public void setView() {
-
+        musicDB = new MusicDB(this);
+        btn_download.setOnClickListener(this);
+        btn_delete.setOnClickListener(this);
+        btn_paly.setOnClickListener(this);
+        btn_otherPlay.setOnClickListener(this);
     }
 
     @Override
@@ -99,13 +98,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 tv_show.setText("开始下载...");
                 Log.i("aa","click btn_download: 开始下载。。。");
                 if(Tools.count==0){
-                    readExcelToDB(0,100);
+                    readExcelToDB(0,30);
                 }else{
                     Toast.makeText(this, "删除原来的数据库和歌曲", Toast.LENGTH_SHORT).show();
                     Log.i("aa","click btn_download: 删除原来的数据库和歌曲");
                     deleteDBAll();
                     deleteMusicFile();
-                    readExcelToDB(Tools.count,100);
+                    readExcelToDB(Tools.count,30);
                 }
                 break;
             case R.id.main_btn_delete:

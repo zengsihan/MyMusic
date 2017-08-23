@@ -169,6 +169,25 @@ public class MusicDB {
     }
 
     /**
+     * 修改isPlay字段，通过url来修改
+     * @param url1 URL
+     * @param isPlay1
+     */
+    public void updateSingleMusicIsPlay(String url1,String isPlay1){
+        MusicInfo mi =findSingleMusicInfoByURL(url1);
+        ContentValues cv=new ContentValues();
+        cv.put("name",mi.getName());
+        cv.put("author",mi.getAuthor());
+        cv.put("url",mi.getUrl());
+        cv.put("isUse",mi.getIsUse());
+        cv.put("isPlay",isPlay1);
+        cv.put("isLove",mi.getIsLove());
+        db.update("music", cv, "url=?", new String[]{url1});
+    }
+
+
+
+    /**
      * 删除一首歌,通过name来删除
      * @param name1 name
      */
@@ -205,6 +224,56 @@ public class MusicDB {
         //Cursor cursor=db.rawQuery("select * from LLL where name like ?",new String[]{'%'+name+'%'});//Like代表通配符
 
         cursor=db.rawQuery("select * from music where name like '%"+name1+"%'",null);
+        if(cursor!=null){
+            while (cursor.moveToNext()){
+                String name=cursor.getString(cursor.getColumnIndex("name"));
+                String author=cursor.getString(cursor.getColumnIndex("author"));
+                String url=cursor.getString(cursor.getColumnIndex("url"));
+                String isUse=cursor.getString(cursor.getColumnIndex("isUse"));
+                String isPlay=cursor.getString(cursor.getColumnIndex("isPlay"));
+                String isLove=cursor.getString(cursor.getColumnIndex("isLove"));
+                MusicInfo mi=new MusicInfo(name,author,url,isUse,isPlay,isLove);
+                list.add(mi);
+            }
+        }
+        cursor.close();
+        return list;
+    }
+
+    /**
+     * 查询所有可以用的，下载好的
+     * @return
+     */
+    public List<MusicInfo> findAllCanUse(){
+        List<MusicInfo> list=new ArrayList<MusicInfo>();
+        Cursor cursor=null;
+
+        cursor=db.rawQuery("select * from music where isUse=1",null);
+        if(cursor!=null){
+            while (cursor.moveToNext()){
+                String name=cursor.getString(cursor.getColumnIndex("name"));
+                String author=cursor.getString(cursor.getColumnIndex("author"));
+                String url=cursor.getString(cursor.getColumnIndex("url"));
+                String isUse=cursor.getString(cursor.getColumnIndex("isUse"));
+                String isPlay=cursor.getString(cursor.getColumnIndex("isPlay"));
+                String isLove=cursor.getString(cursor.getColumnIndex("isLove"));
+                MusicInfo mi=new MusicInfo(name,author,url,isUse,isPlay,isLove);
+                list.add(mi);
+            }
+        }
+        cursor.close();
+        return list;
+    }
+
+    /**
+     * 查询所有
+     * @return
+     */
+    public List<MusicInfo> findAll(){
+        List<MusicInfo> list=new ArrayList<MusicInfo>();
+        Cursor cursor=null;
+
+        cursor=db.rawQuery("select * from music",null);
         if(cursor!=null){
             while (cursor.moveToNext()){
                 String name=cursor.getString(cursor.getColumnIndex("name"));

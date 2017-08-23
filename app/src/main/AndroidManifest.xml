@@ -23,6 +23,7 @@
         <activity android:name=".home.MainActivity"></activity>
         <activity android:name=".play.PlayActivity"></activity>
         <activity android:name=".loading.LoadingActivity"></activity>
+        <service android:name=".play.MusicService"></service>
     </application>
 
 </manifest>
