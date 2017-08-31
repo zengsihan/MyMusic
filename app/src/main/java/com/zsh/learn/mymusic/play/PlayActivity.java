@@ -34,8 +34,10 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
 
 
     Thread thread; //多线程，后台更新UI
-    private boolean playStatus = true; // 控制后台线程退出
+    public static boolean playStatus = true; // 控制后台线程退出
     private boolean isBound = false; // 是否和service绑定了
+
+    private boolean isNext = true; // 用于自动播放下一首的标识
 
     @Override
     public void setLayout() {
@@ -156,6 +158,7 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
+                // 处理progress进度条
                 case 0:
                     // 从bundle中获取进度
                     double progress = msg.getData().getDouble("progress");
@@ -164,6 +167,11 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
                     int position = (int) (max*progress);
                     seekBar.setProgress(position);
                     tv_currentPosition.setText(getTimeString(musicService.getCurrentPosition()));
+                    break;
+                // 处理自动播放下一首
+                case 1:
+                    playNextMusic();
+                    isNext = true;
                     break;
                 default:
                     break;
@@ -194,6 +202,12 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
                     bundle.clear();
                     // 得到当前播放进度
                     progress = musicService.getProgress();
+
+                    // 当播放结束后，发消息，准备播放下一首
+                    if (progress>=1 && isNext){
+                        isNext = false;
+                        handler.sendEmptyMessage(1);
+                    }
                     msg.what = 0;
                     bundle.putDouble("progress",progress);
                     msg.setData(bundle);
@@ -212,9 +226,13 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
         return false;
     }
 
+    /**
+     * 播放或者暂停
+     */
     private void playOrPauseMusic(){
         Log.i("aa","playOrPauseMusic(),isBound="+isBound);
         if (isBound){
+            setUIInfo();
             if (musicService.isPlaying()){
                 img_play.setImageResource(R.drawable.play_btn_play);
                 musicService.pause();
@@ -225,6 +243,9 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    /**
+     * 播放上一首歌曲
+     */
     private void playPreMusic(){
         Log.i("aa","playPreMusic()");
         if (isBound){
@@ -234,6 +255,9 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    /**
+     * 播放下一首歌曲
+     */
     private void playNextMusic(){
         Log.i("aa","playNextMusic()");
         if (isBound){

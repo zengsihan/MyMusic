@@ -1,7 +1,7 @@
 package com.zsh.learn.mymusic.loading;
 
-import android.view.View;
-import android.widget.TextView;
+import android.os.Handler;
+import android.os.Message;
 
 import com.zsh.learn.mymusic.R;
 import com.zsh.learn.mymusic.base.BaseActivity;
@@ -13,8 +13,7 @@ import com.zsh.learn.mymusic.home.MainActivity;
  */
 
 public class LoadingActivity extends BaseActivity{
-
-    TextView tv;
+    private SuperLoadingProgress loadingProgress;
     @Override
     public void setLayout() {
         setContentView(R.layout.activity_loading);
@@ -27,16 +26,39 @@ public class LoadingActivity extends BaseActivity{
 
     @Override
     public void getView() {
-        tv= (TextView) findViewById(R.id.loading_tv_test);
+        loadingProgress = (SuperLoadingProgress) findViewById(R.id.loading_superloading);
     }
 
     @Override
     public void setView() {
-        tv.setOnClickListener(new View.OnClickListener() {
+        final Handler handler = new Handler(){
             @Override
-            public void onClick(View v) {
-                startActivity(MainActivity.class);//跳到主页面
+            public void handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0:
+                        startActivity(MainActivity.class,R.anim.show,R.anim.hide);
+                        break;
+                    default:
+                        break;
+                }
             }
-        });
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    loadingProgress.setProgress(0);
+                    while (loadingProgress.getProgress()<100){
+                        Thread.sleep(10);
+                        loadingProgress.setProgress(loadingProgress.getProgress()+1);
+                    }
+                    loadingProgress.finishSuccess();
+                    Thread.sleep(1800);
+                    handler.sendEmptyMessage(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

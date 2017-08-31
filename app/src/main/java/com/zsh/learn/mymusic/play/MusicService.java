@@ -95,6 +95,13 @@ public class MusicService extends Service {
                 return false;
             }
         });
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+//                playNext();
+            }
+        });
     }
 
 
@@ -199,6 +206,8 @@ public class MusicService extends Service {
         if (mediaPlayer!=null){
             Log.i("aa","service  play()");
             mediaPlayer.start();
+
+            // 设置自动播放下一首歌曲
 //            mediaPlayer.setNextMediaPlayer(mediaPlayer);
         }
     }
@@ -251,6 +260,7 @@ public class MusicService extends Service {
     public void onDestroy() {
         if (mediaPlayer!=null){
             SaveMsg.setMusicPlayInfo(this,name,mediaPlayer.getCurrentPosition());
+//            PlayActivity.playStatus = false;
         }
         // 回收资源
         if (mediaPlayer!=null && mediaPlayer.isPlaying()){
